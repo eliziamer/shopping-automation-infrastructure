@@ -1,0 +1,7 @@
+field,expected_type,not_null
+id,int,True
+firstName,str,True
+lastName,str,True
+email,str,True
+programme,str,True
+courses,list,True

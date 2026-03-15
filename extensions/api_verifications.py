@@ -1,4 +1,7 @@
 
+
+from smart_assertions import soft_assert, verify_expectations
+
 class APIVerify:
     @staticmethod
     def status_code(response, expected_status_code: int):
@@ -47,10 +50,10 @@ class APIVerify:
         Soft asserts that the API response status code matches the expected status code.
         """
         if isinstance(response, dict):  
-            VerifyAPI.errors.append("Expected a Playwright response object, got a dictionary.")
+            APIVerify.errors.append("Expected a Playwright response object, got a dictionary.")
 
         elif response.status != expected_status_code:
-            VerifyAPI.errors.append(
+            APIVerify.errors.append(
                 f"Expected status code {expected_status_code}, but got {response.status}."
             )
 
@@ -59,7 +62,85 @@ class APIVerify:
         """
         Raises all collected assertion errors at once.
         """
-        if VerifyAPI.errors:
-            error_message = "\n".join(VerifyAPI.errors)
-            VerifyAPI.errors.clear()  # Clear errors after raising
+        if APIVerify.errors:
+            error_message = "\n".join(APIVerify.errors)
+            APIVerify.errors.clear()  # Clear errors after raising
             raise AssertionError(f"Soft assertion failures:\n{error_message}")
+        
+    @staticmethod
+    def check_unique_list(ids: list):
+        """
+        Verifies that all items in the list are unique.
+        """
+        assert len(ids) == len(set(ids)), "The list is not unique"
+
+    @staticmethod
+    def check_delete_student(response,expected_delete_status_code):
+        assert response == expected_delete_status_code, f"Expected status code {expected_delete_status_code} for delete operation, but got {response}"
+
+    @staticmethod
+    def check_unique_courses(courses_list: list):
+        unique_courses = set(courses_list)
+        soft_assert(len(courses_list) == len(unique_courses), (
+                f"The courses list is not unique: {courses_list}"
+            ))
+
+    @staticmethod
+    def check_courses_is_not_empty(student_courses: dict):
+        for student, courses in student_courses.items():
+            assert courses, f"Courses list for {student} is empty"
+
+    @staticmethod
+    def check_email_format(emails: list):
+        for email in emails:
+            soft_assert( "@" in email and "." in email, f"Invalid email found: {email}")
+    @staticmethod
+    def check_status_create_student(response,expected_create_status_code):
+        print(f"\nCreate student response: {response.status}")
+        assert response.status == expected_create_status_code, f"\nExpected status code {expected_create_status_code} for create operation, but got {response}"
+    
+    @staticmethod
+    def check_status_update_student(response,expected_update_status_code):
+        assert response == expected_update_status_code, f"\nExpected status code {expected_update_status_code} for update operation, but got {response}"
+       
+    @staticmethod
+    def check_student_details(response):
+        details = ["id", "firstName", "lastName", "email", "programme", "courses"]
+        students = response.json()
+        for student in students:
+            for i in range(len(details)):
+                soft_assert(details[i] in student)  
+
+
+    @staticmethod
+    def assert_removed_student_status(response,expected_status_code):
+        assert response == expected_status_code, f"\nExpected status code {expected_status_code} for getting removed student, but got {response}"
+
+    @staticmethod
+    def check_total_students(response,expected_total_students):
+        assert response == expected_total_students, f"\nExpected total students to be {expected_total_students}, but got {response}"
+        
+
+    @staticmethod
+    def verify_students_field(students, field, expected_type, not_null):
+
+        type_map = {
+            "int": int,
+            "str": str,
+            "list": list
+        }
+
+        for student in students:
+
+            value = student.get(field)
+
+            if not_null:
+                soft_assert(value is not None,
+                            f"{field} should not be None")
+
+            soft_assert(
+                isinstance(value, type_map[expected_type]),
+                f"{field} should be {expected_type}"
+            )
+
+        verify_expectations()

@@ -8,6 +8,6 @@
     "DB_PATH": "data/web/shopping_products.db",
     "ALLURE_RESULTS_DIR": "allure-results",
     "SCREENSHOT_PREFIX": "screenshot",
-    "TRACE_PREFIX": "trace"
-
+    "TRACE_PREFIX": "trace",
+    "CSV_DATA_PATH": "data/ddt/students_fields.csv"
 }
