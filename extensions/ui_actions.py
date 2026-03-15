@@ -12,6 +12,10 @@ class UIActions:
     @allure.step("Navigte to")
     def navigate_to(page:Page,url:str):
         page.goto(url)
+        
+    @staticmethod
+    def refresh(page:Page):
+        page.reload()
 
     @staticmethod
     @allure.step("Click on element")

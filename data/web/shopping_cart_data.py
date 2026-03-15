@@ -1,0 +1,10 @@
+SHOPPING_CART_URL = "https://react-shopping-cart-67954.firebaseapp.com/"
+SIZES_DATA_PATH = r"data/ddt/sizes_data.csv"
+PRODUCTS_DATA_PATH = r"data/ddt/catalog_products.csv"
+PRODUCT_NAME = "Cropped Stay Groovy off white"
+EXPECTED_QUANTITY = "Quantity: 3"
+CLICKS = 2
+EXPECTED_CHECKOUT_MESSAGE = "Checkout - Subtotal: $ 10.90"
+EXPECTED_EMPTY_CART_MESSAGE = "Add some products in the cart"
+EXPECTED_BADGE_COUNT = "1"
+EMPTY_CART_ERROR = "Add some product in the cart!"

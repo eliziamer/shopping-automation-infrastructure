@@ -1,7 +1,13 @@
 {
     "BROWSER_TYPE":"CHROME",
     "HEADLESS":false,
-    "SLOW_MO":500,
-    "DEFAULT_COMMAND_TIMEOUT" : 10000  
+    "SLOW_MO":1500,
+    "DEFAULT_COMMAND_TIMEOUT" : 10000 ,
+     "TRACES_DIR": "traces/",
+    "DB_NAME": "shopping_products.db",
+    "DB_PATH": "data/web/shopping_products.db",
+    "ALLURE_RESULTS_DIR": "allure-results",
+    "SCREENSHOT_PREFIX": "screenshot",
+    "TRACE_PREFIX": "trace"
 
 }

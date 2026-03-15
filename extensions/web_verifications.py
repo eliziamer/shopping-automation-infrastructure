@@ -17,6 +17,8 @@ class WebVerify:
     def strings_are_equal(actual:str,expected:str,message=None):
         assert actual == expected,message
 
+    def numbers_are_equal(actual:int,expected:int,message=None):
+        assert actual == expected,message
 
     @staticmethod
     @allure.step("Verify that the element is visible")
@@ -84,6 +86,8 @@ class WebVerify:
     def soft_all():
         """Raises all collected assertion errors at once."""
         verify_expectations()
+    
+
 
 
 
