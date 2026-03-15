@@ -1,8 +1,0 @@
-{
-    "timestamp": 1771938858810,
-    "status": 400,
-    "error": "Bad Request",
-    "exception": "org.springframework.web.method.annotation.MethodArgumentTypeMismatchException",
-    "message": "Failed to convert value of type 'java.lang.String' to required type 'java.lang.Integer'; nested exception is java.lang.NumberFormatException: For input string: \"search\"",
-    "path": "/student/search"
-}

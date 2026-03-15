@@ -1,8 +1,0 @@
-{
-    "timestamp": 1773303128736,
-    "status": 405,
-    "error": "Method Not Allowed",
-    "exception": "org.springframework.web.HttpRequestMethodNotSupportedException",
-    "message": "Request method 'POST' not supported",
-    "path": "/student/list"
-}
