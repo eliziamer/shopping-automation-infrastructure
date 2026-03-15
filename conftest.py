@@ -2,11 +2,11 @@ import pytest
 from pytest import FixtureRequest
 from playwright.sync_api import Playwright
 
-from data.api.chuck_api_data import *
+from data.api.students_api_data import *
 from data.web.sauce_demo_data import SAUCE_URL
 from utils.common_ops import load_config
 from utils.fixture_helpers import get_browser
-from workflows.api.chuck_api_flows import ChuckApiFlows
+from workflows.api.students_api_flows import StudentsApiFlows
 from workflows.web.sauce_flows import SauceFlows
 
 # Load the configuration
@@ -26,7 +26,7 @@ def page(playwright: Playwright, request:FixtureRequest):
 
 @pytest.fixture(scope= "class")
 def request_context(playwright: Playwright, request:FixtureRequest):
-    request_context=playwright.request.new_context(base_url=CHUCK_BASE_URL)
+    request_context=playwright.request.new_context(base_url=STUDENTS_BASE_URL)
     yield request_context
     request_context.dispose()
 
@@ -37,6 +37,6 @@ def sauce_flows(page):
 
 
 @pytest.fixture
-def chuck_flows(request_context):
-    return ChuckApiFlows(request_context)
+def students_flows(request_context):
+    return StudentsApiFlows(request_context)
 

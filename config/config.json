@@ -2,6 +2,6 @@
     "BROWSER_TYPE":"CHROME",
     "HEADLESS":false,
     "SLOW_MO":500,
-    "DEFAULT_COMMAND_TIMEOUT" : 10000  
-
+    "DEFAULT_COMMAND_TIMEOUT" : 10000,
+    "CSV_DATA_PATH": "data/ddt/students_fields.csv"
 }
