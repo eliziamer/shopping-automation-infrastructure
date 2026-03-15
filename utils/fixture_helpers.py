@@ -24,11 +24,17 @@ def get_browser(playwright: Playwright,browser_type)->Browser:
 
 def attach_trace(page, item_name, trace_path):
     """Attaches a Playwright trace to the Allure report."""
-    page.context.tracing.stop(path=trace_path)
-    trace_location = os.path.join(os.getcwd(), ALLURE_RESULTS_DIR) 
-    if os.path.exists(trace_path):
-        message = TRACE_MESSAGE.format(trace_location, os.path.basename(trace_path))
-        allure.attach(message, name=f"Trace Message", attachment_type=allure.attachment_type.HTML)
+    try:
+        page.context.tracing.stop(path=trace_path)
+        if os.path.exists(trace_path):
+            trace_location = os.path.join(os.getcwd(), CONFIG['ALLURE_RESULTS_DIR']) 
+            message = TRACE_MESSAGE.format(trace_location, os.path.basename(trace_path))
+            allure.attach(message, name="Trace Message", attachment_type=allure.attachment_type.HTML)
+            with open(trace_path, "rb") as trace_file:
+                allure.attach(trace_file.read(), name=f"Trace Zip: {item_name}", 
+                              attachment_type=allure.attachment_type.ZIP)
+    except Exception as e:
+        print(f"Failed to attach trace: {e}")
 
 def attach_screenshot(page, item_name, screenshot_path):
     """Captures and attaches a screenshot to the Allure report."""
